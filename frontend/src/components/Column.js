@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SketchPicker } from 'react-color';
-import Post from './Post';
 import axios from 'axios';
 
 
