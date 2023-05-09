@@ -57,7 +57,7 @@ const Column = (props) => {
     }
     getTodos(categoria);
     setUpdate(false);
-  },[update]);
+  },[categoria, update]);
     
   
     /* const handleEdit = (key,index, e) => {
@@ -82,11 +82,13 @@ const Column = (props) => {
 
     
      
-    const handleEdit = (index, e) => {
-
-      const newItems = [...posts];
+    const handleEdit = (index, e, categoria) => {
+      console.log(e.target.value);
+       const newItems = [...posts];
       newItems[index].value = e.target.value;
       setPosts(newItems);
+      setUpdate(true);
+      categoria = categoria;
       /* console.log(index);
       const updatedPosts = [...posts];
       updatedPosts[index][e.target.id] = e.target.value;
@@ -99,7 +101,6 @@ const Column = (props) => {
 
     const updatePost = (index) => {
       // Perform a PUT request to update the post on the server
-      console.log('hola');
       console.log(posts[index].id, '-', posts[index])
       axios.patch(`http://localhost:5000//updatePost/\${posts[index].id}`, posts[index])
         .then((response) => {
@@ -140,7 +141,7 @@ const Column = (props) => {
               value={item.title}
               name= 'title'
               
-              onChange={(e) => handleEdit(index, e)}
+              onChange={(e) => handleEdit(index, e, item.category)}
             />
             <button onClick={(e) => deletePost(item._id)}>Delete</button>
             <input type='hidden' value={item._id} />
