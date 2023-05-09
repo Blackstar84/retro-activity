@@ -35,18 +35,6 @@ app.use((error, req, res, next) => {
 });
 
 
-const socket = socketIo(server, {
-  cors: {
-    origin: '*',
-  },
-})
-
-socket.on('connection', (socket) => {
-  console.log('a user connected ' + socket.id, new Date()) // socket.id is unique for each connection
-})
-
-app.set('socket', socket)
-
 mongoose
 .connect('mongodb://localhost:27017/retro-activity')
 .then(()=>{
